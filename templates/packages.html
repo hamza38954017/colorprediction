@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<h4 class="mb-4"><i class="bi bi-box-seam me-2"></i>Deposit Packages</h4>
+<div class="row g-4">
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header">➕ Add New Package</div>
+      <div class="card-body">
+        <form method="POST">
+          <input type="hidden" name="action" value="add">
+          <div class="mb-3"><label class="form-label">Label</label>
+            <input type="text" name="label" class="form-control" placeholder="e.g. Starter" required></div>
+          <div class="mb-3"><label class="form-label">Coins</label>
+            <input type="number" name="coins" class="form-control" placeholder="100" required></div>
+          <div class="mb-3"><label class="form-label">Price (₹)</label>
+            <input type="number" name="price" class="form-control" placeholder="100" required></div>
+          <div class="mb-3"><label class="form-label">Bonus Coins (0 for none)</label>
+            <input type="number" name="bonus" class="form-control" value="0"></div>
+          <button type="submit" class="btn btn-purple">Add Package</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <div class="card"><div class="card-body p-0">
+      <table class="table table-hover mb-0">
+        <thead><tr><th>Label</th><th>Coins</th><th>Bonus</th><th>Price</th><th>Del</th></tr></thead>
+        <tbody>
+        {% for pkg_id, pkg in packages %}
+          <tr>
+            <td>{{ pkg.label }}</td>
+            <td>{{ pkg.coins }} 🪙</td>
+            <td>{{ pkg.bonus or 0 }} 🪙</td>
+            <td>₹{{ pkg.price }}</td>
+            <td>
+              <form method="POST" class="d-inline">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="pkg_id" value="{{ pkg_id }}">
+                <button type="submit" class="btn btn-danger btn-sm">🗑</button>
+              </form>
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="5" class="text-center text-secondary py-3">No packages — add one!</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div></div>
+  </div>
+</div>
+{% endblock %}

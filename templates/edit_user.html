@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h4 class="mb-4"><i class="bi bi-person-gear me-2"></i>Edit User</h4>
+<div class="card" style="max-width:500px">
+  <div class="card-body">
+    <p><strong>Name:</strong> {{ user.full_name }}</p>
+    <p><strong>ID:</strong> <code>{{ cid }}</code></p>
+    <p><strong>Current Wallet:</strong> {{ user.wallet or 0 }} 🪙</p>
+    <hr class="border-secondary">
+    <form method="POST">
+      <div class="mb-3">
+        <label class="form-label">New Wallet Balance (coins)</label>
+        <input type="number" name="wallet" class="form-control" value="{{ user.wallet or 0 }}" min="0" required>
+      </div>
+      <button type="submit" class="btn btn-purple">💾 Save</button>
+      <a href="/admin/users" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

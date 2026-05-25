@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+<h4 class="mb-4"><i class="bi bi-gear me-2"></i>Settings</h4>
+<div class="card" style="max-width:700px">
+  <div class="card-body">
+    <form method="POST">
+      <h6 class="text-secondary mb-3">Bot Configuration</h6>
+      <div class="row g-3 mb-3">
+        <div class="col-md-6">
+          <label class="form-label">Bot Username (without @)</label>
+          <input type="text" name="bot_username" class="form-control" value="{{ cfg.bot_username or '' }}">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Support Username (with @)</label>
+          <input type="text" name="support_username" class="form-control" value="{{ cfg.support_username or '' }}">
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Rules Text (Markdown)</label>
+        <textarea name="rules_text" class="form-control" rows="5">{{ cfg.rules_text or '' }}</textarea>
+      </div>
+      <hr class="border-secondary">
+      <h6 class="text-secondary mb-3">Coins & Limits</h6>
+      <div class="row g-3 mb-3">
+        <div class="col-md-4">
+          <label class="form-label">Signup Bonus (coins)</label>
+          <input type="number" name="signup_bonus" class="form-control" value="{{ cfg.signup_bonus or 50 }}">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Min Deposit (₹)</label>
+          <input type="number" name="min_deposit" class="form-control" value="{{ cfg.min_deposit or 100 }}">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Referral Commission (%)</label>
+          <input type="number" step="0.1" name="refer_commission" class="form-control" value="{{ cfg.refer_commission or 5 }}">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Min Withdrawal (coins)</label>
+          <input type="number" name="min_withdrawal" class="form-control" value="{{ cfg.min_withdrawal or 100 }}">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Max Withdrawal (coins)</label>
+          <input type="number" name="max_withdrawal" class="form-control" value="{{ cfg.max_withdrawal or 50000 }}">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Notify Chat IDs (comma separated)</label>
+          <input type="text" name="notify_chat_ids" class="form-control" value="{{ cfg.notify_chat_ids or '' }}">
+        </div>
+      </div>
+      <hr class="border-secondary">
+      <h6 class="text-secondary mb-3">Admin Panel</h6>
+      <div class="row g-3 mb-3">
+        <div class="col-md-6">
+          <label class="form-label">Panel Name</label>
+          <input type="text" name="panel_name" class="form-control" value="{{ cfg.panel_name or '' }}">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Admin Username</label>
+          <input type="text" name="admin_username" class="form-control" value="{{ cfg.admin_username or '' }}">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Admin Password</label>
+          <input type="password" name="admin_password" class="form-control" placeholder="Leave blank to keep current">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-purple">💾 Save Settings</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

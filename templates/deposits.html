@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<h4 class="mb-4"><i class="bi bi-cash-coin me-2"></i>Deposit Requests</h4>
+<div class="card">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead><tr>
+          <th>Date</th><th>User</th><th>Package</th>
+          <th>Amount (₹)</th><th>Coins</th><th>UTR</th>
+          <th>Status</th><th>Actions</th>
+        </tr></thead>
+        <tbody>
+        {% for dep_id, dep in deposits %}
+          <tr>
+            <td class="small text-secondary">{{ dep.created_at[:16] }}</td>
+            <td>{{ dep.user_name }}<br><small class="text-secondary">{{ dep.chat_id }}</small></td>
+            <td>{{ dep.pkg_id }}</td>
+            <td><strong>₹{{ dep.price }}</strong></td>
+            <td>{{ dep.coins }} 🪙</td>
+            <td><code>{{ dep.utr }}</code></td>
+            <td>
+              <span class="badge badge-{{ dep.status }}">{{ dep.status.title() }}</span>
+            </td>
+            <td>
+              {% if dep.status == 'pending' %}
+              <form method="POST" action="/admin/deposits/action" class="d-inline">
+                <input type="hidden" name="dep_id" value="{{ dep_id }}">
+                <button name="action" value="approve" class="btn btn-success btn-sm">✅ Approve</button>
+                <button name="action" value="reject"  class="btn btn-danger btn-sm">❌ Reject</button>
+              </form>
+              {% else %}
+              <span class="text-secondary small">Done</span>
+              {% endif %}
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="8" class="text-center text-secondary py-4">No deposit requests.</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

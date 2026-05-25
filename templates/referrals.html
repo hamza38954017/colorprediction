@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h4 class="mb-4"><i class="bi bi-share me-2"></i>Referral Leaderboard</h4>
+<div class="card"><div class="card-body p-0">
+  <table class="table table-hover mb-0">
+    <thead><tr><th>#</th><th>User</th><th>Referrals</th><th>Verified</th><th>Earned (coins)</th></tr></thead>
+    <tbody>
+    {% for i, row in enumerate(referrals, 1) %}
+      <tr>
+        <td>{{ i }}</td>
+        <td>{{ row.name }}<br><small class="text-secondary">{{ row.chat_id }}</small></td>
+        <td>{{ row.count }}</td>
+        <td>{{ row.verified }}</td>
+        <td>{{ row.earned }} 🪙</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="5" class="text-center text-secondary py-4">No referrals yet.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div></div>
+{% endblock %}

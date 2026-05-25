@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+<h4 class="mb-4 text-light"><i class="bi bi-speedometer2 me-2 text-purple"></i>Dashboard</h4>
+<div class="row g-3 mb-4">
+  <div class="col-6 col-md-3">
+    <div class="stat-card text-center">
+      <div class="text-secondary small mb-1"><i class="bi bi-people me-1"></i>Total Users</div>
+      <div class="stat-num">{{ total_users }}</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="stat-card text-center">
+      <div class="text-secondary small mb-1"><i class="bi bi-coin me-1"></i>Total Wallet</div>
+      <div class="stat-num">{{ total_wallet }}</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="stat-card text-center">
+      <div class="text-secondary small mb-1"><i class="bi bi-cash-coin me-1"></i>Pending Deposits</div>
+      <div class="stat-num text-warning">{{ pending_deps }}</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="stat-card text-center">
+      <div class="text-secondary small mb-1"><i class="bi bi-bank me-1"></i>Pending Withdrawals</div>
+      <div class="stat-num text-info">{{ pending_wds }}</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header py-2"><i class="bi bi-clock-history me-2"></i>Last 5 Game Results</div>
+  <div class="card-body">
+    {% if last_outcomes %}
+      <div class="d-flex gap-3 flex-wrap">
+        {% for outcome in last_outcomes %}
+          <span class="badge fs-5 px-3 py-2 rounded-pill"
+            style="background: {% if 'Green' in outcome %}#10b981{% elif 'Violet' in outcome %}#8b5cf6{% else %}#ef4444{% endif %}">
+            {{ outcome }}
+          </span>
+        {% endfor %}
+      </div>
+    {% else %}
+      <span class="text-secondary">No results yet — game loop not started.</span>
+    {% endif %}
+  </div>
+</div>
+
+<div class="row g-3 mt-2">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header"><i class="bi bi-lightning me-2"></i>Quick Actions</div>
+      <div class="card-body d-flex flex-wrap gap-2">
+        <a href="/admin/deposits"    class="btn btn-warning btn-sm">⏳ Review Deposits</a>
+        <a href="/admin/withdrawals" class="btn btn-info btn-sm">🏦 Review Withdrawals</a>
+        <a href="/admin/broadcast"   class="btn btn-purple btn-sm">📢 Broadcast</a>
+        <a href="/admin/packages"    class="btn btn-secondary btn-sm">📦 Packages</a>
+        <a href="/admin/payment-info" class="btn btn-secondary btn-sm">🏦 Payment Info</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

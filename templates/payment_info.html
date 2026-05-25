@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h4 class="mb-4"><i class="bi bi-qr-code me-2"></i>Payment Info (UPI / QR)</h4>
+<p class="text-secondary">This is what users see when they deposit — your UPI ID, name, and QR code.</p>
+<div class="card" style="max-width:600px">
+  <div class="card-body">
+    <form method="POST">
+      <div class="mb-3">
+        <label class="form-label">Recipient Name</label>
+        <input type="text" name="name" class="form-control" value="{{ info.name or '' }}" placeholder="e.g. GamePay">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">UPI ID</label>
+        <input type="text" name="upi_id" class="form-control" value="{{ info.upi_id or '' }}" placeholder="example@upi">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">QR Code Image URL</label>
+        <input type="url" name="qr_url" class="form-control" value="{{ info.qr_url or '' }}" placeholder="https://...">
+        <div class="form-text text-secondary">Upload your QR code to any image host (Imgur, etc.) and paste the link here.</div>
+      </div>
+      {% if info.qr_url %}
+      <div class="mb-3">
+        <label class="form-label">Current QR Preview</label><br>
+        <img src="{{ info.qr_url }}" style="max-width:200px; border-radius:8px; border:1px solid #2a2a4a">
+      </div>
+      {% endif %}
+      <button type="submit" class="btn btn-purple">💾 Save</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
