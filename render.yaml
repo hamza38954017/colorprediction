@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: colourbot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: FIREBASE_URL
+        sync: false
+      - key: FIREBASE_SECRET
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false
